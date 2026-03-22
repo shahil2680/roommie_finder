@@ -1,13 +1,203 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: 'Inter', sans-serif;
+  background: #0a0f1e;
+  color: #e2e8f0;
+  min-height: 100vh;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #0a0f1e; }
+::-webkit-scrollbar-thumb { background: #6366f1; border-radius: 3px; }
+
+/* ── Animated blobs ── */
+.bg-blob {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.13;
+  animation: float 8s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+.blob1 { width: 600px; height: 600px; background: #6366f1; top: -200px; left: -150px; animation-delay: 0s; }
+.blob2 { width: 450px; height: 450px; background: #8b5cf6; bottom: -120px; right: -100px; animation-delay: 3s; }
+.blob3 { width: 350px; height: 350px; background: #06b6d4; top: 40%; left: 40%; animation-delay: 1.5s; }
+@keyframes float {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-30px) scale(1.05); }
+}
+
+/* ── Glass card ── */
+.glass-card {
+  background: rgba(255,255,255,0.04);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 20px;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.08);
+}
+
+/* ── Form inputs ── */
+.rf-input {
+  width: 100%;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 12px;
+  padding: 13px 16px;
+  color: #fff;
+  font-size: 0.95rem;
+  font-family: 'Inter', sans-serif;
+  transition: border-color 0.3s, box-shadow 0.3s, background 0.3s;
+  outline: none;
+}
+.rf-input::placeholder { color: rgba(255,255,255,0.28); }
+.rf-input:focus {
+  background: rgba(255,255,255,0.09);
+  border-color: rgba(99,102,241,0.7);
+  box-shadow: 0 0 0 3px rgba(99,102,241,0.18);
+}
+
+/* ── Label ── */
+.rf-label {
+  display: block;
+  color: rgba(255,255,255,0.65);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+/* ── Gradient button ── */
+.rf-btn {
+  width: 100%;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  border: none;
+  border-radius: 12px;
+  padding: 14px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #fff;
+  letter-spacing: 0.3px;
+  cursor: pointer;
+  transition: transform 0.25s, box-shadow 0.25s;
+  box-shadow: 0 8px 24px rgba(99,102,241,0.35);
+  font-family: 'Inter', sans-serif;
+}
+.rf-btn:hover { transform: translateY(-2px); box-shadow: 0 14px 32px rgba(99,102,241,0.5); }
+.rf-btn:active { transform: translateY(0); }
+.rf-btn.secondary {
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.14);
+  box-shadow: none;
+}
+.rf-btn.secondary:hover { background: rgba(255,255,255,0.12); box-shadow: none; }
+
+/* ── Brand logo ── */
+.brand-logo {
+  width: 54px; height: 54px;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.5rem; color: white;
+  box-shadow: 0 8px 20px rgba(99,102,241,0.4);
+  margin: 0 auto 20px;
+}
+
+/* ── Slide-up animation ── */
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.slide-up { animation: slideUp 0.55s ease-out both; }
+
+/* ── Page wrapper (keeps content above blobs) ── */
+.rf-page {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+}
+
+/* ── Navbar ── */
+.rf-nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(10,15,30,0.85);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  padding: 14px 28px;
+  display: flex; align-items: center; gap: 24px;
+}
+.rf-nav .brand { font-weight: 800; font-size: 1.1rem; color: #fff; flex: 1; letter-spacing: -0.3px; }
+.rf-nav .brand span { background: linear-gradient(135deg, #818cf8, #c084fc); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.rf-nav a {
+  color: rgba(255,255,255,0.55);
+  text-decoration: none;
+  font-size: 0.88rem;
+  font-weight: 500;
+  padding: 7px 14px;
+  border-radius: 8px;
+  transition: color 0.2s, background 0.2s;
+}
+.rf-nav a:hover { color: #fff; background: rgba(255,255,255,0.07); }
+
+/* ── Section title ── */
+.section-title {
+  font-size: 1.75rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  margin-bottom: 8px;
+}
+.section-sub {
+  color: rgba(255,255,255,0.45);
+  font-size: 0.92rem;
+  margin-bottom: 32px;
+}
+
+/* ── Match score badge ── */
+.score-badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  background: rgba(34,197,94,0.15);
+  border: 1px solid rgba(34,197,94,0.3);
+  color: #4ade80;
+  font-size: 0.8rem; font-weight: 700;
+  padding: 4px 10px; border-radius: 20px;
+}
+
+/* ── Property / Match card details ── */
+.detail-row {
+  display: flex; align-items: center; gap: 8px;
+  color: rgba(255,255,255,0.55);
+  font-size: 0.88rem;
+  margin-bottom: 6px;
+}
+.detail-row svg, .detail-row i { color: #818cf8; flex-shrink: 0; }
+
+/* ── Grid layouts ── */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+/* ── Divider ── */
+.rf-divider { border: none; border-top: 1px solid rgba(255,255,255,0.08); margin: 24px 0; }
+
+/* ── Auth link ── */
+.auth-link { color: #818cf8; text-decoration: none; font-weight: 500; transition: color 0.2s; }
+.auth-link:hover { color: #a5b4fc; }
+
+/* ── Success toast ── */
+.rf-toast {
+  position: fixed; bottom: 24px; right: 24px; z-index: 999;
+  background: rgba(34,197,94,0.15);
+  border: 1px solid rgba(34,197,94,0.3);
+  color: #4ade80;
+  padding: 14px 20px; border-radius: 12px;
+  font-weight: 600; font-size: 0.9rem;
+  animation: slideUp 0.3s ease-out;
 }
